@@ -1,25 +1,16 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+import blob1 from './assets/blob-yellow.png'
+import blob2 from './assets/blob-blue.png'
+import IntroPage from './components/IntroPage'
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <img className='blob-yellow' src={blob1} alt='corner yellow background' />
+      <img className='blob-blue' src={blob2} alt='corner blue background' />
+      <IntroPage />
     </div>
   );
 }
 
-export default App;
