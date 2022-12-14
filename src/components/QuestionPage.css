@@ -1,0 +1,12 @@
+.question-box {
+    border-bottom: 0.794239px solid #DBDEF0;
+    
+}
+.question {
+    margin: 0;
+    font-size: 16px;
+}
+.answer {
+    margin: 0;
+    font-size: 10px;
+}

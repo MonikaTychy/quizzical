@@ -1,9 +1,4 @@
-.IntroPage {
-    padding-top: 200px;
-}
 .title {
-    color: black;
-    text-align: center;
     font-size: 31px;
 }
 .description {
@@ -11,5 +6,8 @@
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 400;
-    text-align: center;
+}
+.btn.start {
+    width: 193px;
+    height: 52px;
 }
