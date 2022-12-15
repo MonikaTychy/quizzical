@@ -4,6 +4,7 @@ import blob1 from './assets/blob-yellow.png'
 import blob2 from './assets/blob-blue.png'
 import IntroPage from './components/IntroPage'
 import QuestionPage from './components/QuestionPage'
+import {decode} from 'html-entities';
 
 export default function App() {
   const [startQuizz, setStartQuizz] = useState(false)
@@ -22,7 +23,7 @@ export default function App() {
 
   const questionElements = questions.map(el => 
     <QuestionPage 
-    question={el.question} 
+    question={decode(el.question)} 
     correctAnswer={el.correct_answer}
     incorrectAnswers={[el.incorrect_answers]}
     /> 
