@@ -5,29 +5,49 @@ import blob2 from './assets/blob-blue.png'
 import IntroPage from './components/IntroPage'
 import QuestionPage from './components/QuestionPage'
 import {decode} from 'html-entities';
+import { nanoid } from 'nanoid'
 
 export default function App() {
   const [startQuizz, setStartQuizz] = useState(false)
-  const [questions, setQuestion] = useState([])
+  const [questions, setQuestions] = useState([])
 
   useEffect(() => {
-     fetch('https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple')
-     .then(res => res.json())
-     .then(data => setQuestion(data.results))
-     .catch(err => console.error(err))
+       async function getQuestions() {
+          const res = await fetch('https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple')
+          
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`)
+          }
+          const data = await res.json()
+          setQuestions(data.results.map(el => {
+            return {
+              key: nanoid(),
+              id: nanoid(),
+              question: decode(el.question),
+              correctAnswer: decode(el.correct_answer),
+              wrongAnswers: el.incorrect_answers,
+              allAnswers: 1,
+              chosenAnswer: false
+            }
+          }))
+       }
+
+       getQuestions()
   }, [])
 
  function start() {
     setStartQuizz(true)
   }
 
-  const questionElements = questions.map(el => 
+ const questionElements = questions.map(el => 
     <QuestionPage 
-    question={decode(el.question)} 
-    correctAnswer={el.correct_answer}
-    incorrectAnswers={[el.incorrect_answers]}
+    key={el.key}
+    id={el.id}
+    question={el.question} 
+    correctAnswer={el.correctAnswer}
+    wrongAnswers={el.wrongAnswers}
     /> 
-    )
+    ) 
 
   return (
     <div className="App">
