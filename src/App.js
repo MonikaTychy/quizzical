@@ -25,11 +25,12 @@ export default function App() {
               id: nanoid(),
               question: decode(el.question),
               correctAnswer: decode(el.correct_answer),
-              wrongAnswers: el.incorrect_answers,
-              allAnswers: 1,
-              chosenAnswer: false
+              wrongAnswers: el.incorrect_answers.map(answ => decode(answ)),
+              chosenAnswer: false,
+              isCorrect: false
             }
           }))
+         
        }
 
        getQuestions()

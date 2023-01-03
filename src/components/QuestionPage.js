@@ -1,18 +1,20 @@
 import React from 'react'
 import './QuestionPage.css'
 import { nanoid } from 'nanoid'
-import {decode} from 'html-entities'
 
 export default function QuestionPage(props) {
+    
+    const correctAnswer = props.correctAnswer
+    const allAnswers = [...props.wrongAnswers, correctAnswer].sort(() => Math.random() - 0.5)
+    
     return (
-        <div className='question-box'>
+        <div className='QuestionPage'>
+            <div className='question-box'>
             <h2 className='question'>{props.question}</h2>
-            <p className='answer'>{props.correctAnswer}</p>
-            {props.wrongAnswers.map(el => {
-                return (
-                    <p key={nanoid()} className='answer'>{decode(el)}</p>
-                )
+            {allAnswers.map(answ => {
+                return <p className='answer' key={nanoid()} >{answ}</p>
             })}
+            </div>
         </div>
     )
 }
