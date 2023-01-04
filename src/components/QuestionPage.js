@@ -4,16 +4,22 @@ import { nanoid } from 'nanoid'
 
 export default function QuestionPage(props) {
     
-    const correctAnswer = props.correctAnswer
-    const allAnswers = [...props.wrongAnswers, correctAnswer].sort(() => Math.random() - 0.5)
+    const answerElements = props.answers.map(answ => {
+        return <span 
+        className={`answer ${answ.selected ? "selected" : ""} `}
+        key={nanoid()}
+        onClick={() => props.chooseAnswer(answ.answerId, props.id)}
+        >
+                {answ.answer}
+              </span>
+    })
+
     
     return (
         <div className='QuestionPage'>
             <div className='question-box'>
             <h2 className='question'>{props.question}</h2>
-            {allAnswers.map(answ => {
-                return <p className='answer' key={nanoid()} >{answ}</p>
-            })}
+            {answerElements}
             </div>
         </div>
     )

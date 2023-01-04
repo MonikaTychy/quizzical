@@ -4,7 +4,7 @@ import blob1 from './assets/blob-yellow.png'
 import blob2 from './assets/blob-blue.png'
 import IntroPage from './components/IntroPage'
 import QuestionPage from './components/QuestionPage'
-import {decode} from 'html-entities';
+import { decode } from 'html-entities';
 import { nanoid } from 'nanoid'
 
 export default function App() {
@@ -19,18 +19,33 @@ export default function App() {
             throw new Error(`HTTP error! status: ${res.status}`)
           }
           const data = await res.json()
-          setQuestions(data.results.map(el => {
-            return {
-              key: nanoid(),
-              id: nanoid(),
-              question: decode(el.question),
-              correctAnswer: decode(el.correct_answer),
-              wrongAnswers: el.incorrect_answers.map(answ => decode(answ)),
-              chosenAnswer: false,
-              isCorrect: false
-            }
-          }))
-         
+          const dataArray = data.results.map(el => {
+            const correctAnswer = {
+                answer: decode(el.correct_answer), 
+                selected: false, 
+                isCorrect: true, 
+                answerId: nanoid()
+              }
+            const wrongAnswers = el.incorrect_answers.map(answ => {
+                return {
+                  answer: decode(answ),
+                  selected: false,
+                  isCorrect: false,
+                  answerId: nanoid()
+                }
+              })
+              const allAnswers = [correctAnswer, ...wrongAnswers]
+              const shuffledAnswers =  allAnswers.sort(() => Math.random() - 0.5)
+
+              return  {
+                key: nanoid(),
+                id: nanoid(),
+                question: decode(el.question),
+                answers: shuffledAnswers
+              }
+          })
+
+          setQuestions(dataArray)    
        }
 
        getQuestions()
@@ -40,13 +55,17 @@ export default function App() {
     setStartQuizz(true)
   }
 
+  function chooseAnswer(questionId, answerId) {
+    console.log(answerId)
+    console.log(questionId)
+  }
+
  const questionElements = questions.map(el => 
     <QuestionPage 
     key={el.key}
     id={el.id}
     question={el.question} 
-    correctAnswer={el.correctAnswer}
-    wrongAnswers={el.wrongAnswers}
+    answers={el.answers}
     /> 
     ) 
 
