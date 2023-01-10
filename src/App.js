@@ -61,8 +61,8 @@ export default function App() {
         return prevQuest.id === questionId ?
          {...prevQuest, answers: prevQuest.answers.map(answer => {
             return answer.answerId === answerId ?
-              {...answer, selected: !answer.selected }
-              : answer
+              {...answer, selected: !answer.selected}
+              : {...answer, selected: false}
             })
           }
           : prevQuest
