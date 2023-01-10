@@ -49,16 +49,27 @@ export default function App() {
        }
 
        getQuestions()
-  }, [])
+  }, [startQuizz])
 
  function start() {
     setStartQuizz(true)
   }
 
-  function chooseAnswer(questionId, answerId) {
-    console.log(answerId)
-    console.log(questionId)
-  }
+  function chooseAnswer(answerId, questionId) {
+    setQuestions(prevQuestions => {
+       return prevQuestions.map(prevQuest => {
+        return prevQuest.id === questionId ?
+         {...prevQuest, answers: prevQuest.answers.map(answer => {
+            return answer.answerId === answerId ?
+              {...answer, selected: !answer.selected }
+              : answer
+            })
+          }
+          : prevQuest
+        })
+       })
+    }
+  
 
  const questionElements = questions.map(el => 
     <QuestionPage 
@@ -66,6 +77,7 @@ export default function App() {
     id={el.id}
     question={el.question} 
     answers={el.answers}
+    chooseAnswer={chooseAnswer}
     /> 
     ) 
 
