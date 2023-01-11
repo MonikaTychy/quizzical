@@ -49,7 +49,7 @@ export default function App() {
        }
 
        getQuestions()
-  }, [startQuizz])
+  }, [])
 
  function start() {
     setStartQuizz(true)
@@ -71,24 +71,16 @@ export default function App() {
     }
   
 
- const questionElements = questions.map(el => 
-    <QuestionPage 
-    key={el.key}
-    id={el.id}
-    question={el.question} 
-    answers={el.answers}
-    chooseAnswer={chooseAnswer}
-    /> 
-    ) 
-
   return (
     <div className="App">
       <img className='blob-yellow' src={blob1} alt='corner yellow background' />
       <img className='blob-blue' src={blob2} alt='corner blue background' />
       {startQuizz ? 
-      questionElements
-      : 
-      <IntroPage start={start} />}
+      <QuestionPage 
+      questions={questions}
+      chooseAnswer={chooseAnswer}
+      /> 
+      : <IntroPage start={start} />}
     </div>
   );
 }

@@ -2,25 +2,32 @@ import React from 'react'
 import './QuestionPage.css'
 import { nanoid } from 'nanoid'
 
-export default function QuestionPage(props) {
-    
-    const answerElements = props.answers.map(answ => {
-        return <span 
-        className={`answer ${answ.selected ? "selected" : ""} `}
-        key={nanoid()}
-        onClick={() => props.chooseAnswer(answ.answerId, props.id)}
-        >
-                {answ.answer}
-              </span>
-    })
+export default function QuestionPage({questions, chooseAnswer}) {
 
+    const questionElements = questions.map(question => {
+        return (
+            <div className='question-box' key={question.key}>
+            <h2 className='question'>{question.question}</h2>
+            {question.answers.map(answ => {
+               return (
+                <span 
+                  className={`answer ${answ.selected ? "selected" : ""} `}
+                  key={nanoid()}
+                  onClick={() => chooseAnswer(answ.answerId, question.id)}>
+                  {answ.answer}
+                </span>
+                     )
+             })
+            }
+            </div>
+      )
+    })
+    
     
     return (
         <div className='QuestionPage'>
-            <div className='question-box'>
-            <h2 className='question'>{props.question}</h2>
-            {answerElements}
-            </div>
+            {questionElements}
+            <button className='btn'>Check answers</button>
         </div>
     )
 }

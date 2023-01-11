@@ -23,7 +23,8 @@
 }
 .btn {
   display: block;
-  margin: 0 auto;
+  margin: 40px auto;
+  padding: 10px 20px;
   background: #4D5B9E;
   border: none;
   border-radius: 15px;
