@@ -51,7 +51,7 @@ export default function App() {
        }
 
        getQuestions()
-  }, [])
+  }, [startQuizz])
 
  function start() {
     setStartQuizz(true)
@@ -83,6 +83,7 @@ export default function App() {
     setStartQuizz(false)
     setEndQuizz(false)
     setResult(0)
+    setQuestions([])
   }
 
   return (

@@ -42,11 +42,12 @@
 }
 
 .answer.correct {
-    background-color: green;
+    background-color: #94D7A2;
 }
 
 .answer.incorrect {
-    background-color: red;
+    background-color: #F8BCBC;
+    opacity: 0.5;
 }
 
 .answer.hazy {
