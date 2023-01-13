@@ -2,7 +2,7 @@ import React from 'react'
 import './QuestionPage.css'
 import { nanoid } from 'nanoid'
 
-export default function QuestionPage({questions, chooseAnswer}) {
+export default function QuestionPage({questions, chooseAnswer, checkAnswers, endQuizz, result, restartGame}) {
 
     const questionElements = questions.map(question => {
         return (
@@ -27,7 +27,22 @@ export default function QuestionPage({questions, chooseAnswer}) {
     return (
         <div className='QuestionPage'>
             {questionElements}
-            <button className='btn'>Check answers</button>
+            {endQuizz ?
+              <div className='score'>
+                <p className='score-data'>You scored {result}/5 correct answers</p>
+                <button 
+                 className='btn playagain'
+                 onClick={restartGame}>
+                 Play Again
+                </button>
+                </div>
+              :
+              <button 
+               className='btn'
+               onClick={checkAnswers}>
+               Check answers
+              </button> 
+        } 
         </div>
     )
 }

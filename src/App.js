@@ -10,6 +10,8 @@ import { nanoid } from 'nanoid'
 export default function App() {
   const [startQuizz, setStartQuizz] = useState(false)
   const [questions, setQuestions] = useState([])
+  const [result, setResult] = useState(0)
+  const [endQuizz, setEndQuizz] = useState(false)
 
   useEffect(() => {
        async function getQuestions() {
@@ -70,6 +72,18 @@ export default function App() {
        })
     }
   
+  function checkAnswers() {
+      setResult(questions.filter(question => {
+        return question.answers.filter(ans => ans.selected && ans.isCorrect)[0]
+     }).length)
+      setEndQuizz(true)
+  }
+
+  function restartGame() {
+    setStartQuizz(false)
+    setEndQuizz(false)
+    setResult(0)
+  }
 
   return (
     <div className="App">
@@ -79,6 +93,10 @@ export default function App() {
       <QuestionPage 
       questions={questions}
       chooseAnswer={chooseAnswer}
+      checkAnswers={checkAnswers}
+      endQuizz={endQuizz}
+      result={result}
+      restartGame={restartGame}
       /> 
       : <IntroPage start={start} />}
     </div>

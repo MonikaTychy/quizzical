@@ -40,3 +40,29 @@
     background-color: #D6DBF5;
     border: none;
 }
+
+.answer.correct {
+    background-color: green;
+}
+
+.answer.incorrect {
+    background-color: red;
+}
+
+.answer.hazy {
+    opacity: 0.5;
+}
+
+.score {
+    display: flex;
+    align-items: center;
+    margin: 30px 10px;
+}
+
+.btn.playagain {
+    margin: 0 auto;
+}
+
+.score-data {
+    margin: 0;
+}
