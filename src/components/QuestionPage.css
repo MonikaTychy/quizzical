@@ -2,6 +2,7 @@
     width: 50%;
     text-align: start;
     z-index: 1;
+    overflow: overlay;
 }
 
 .question-box {
