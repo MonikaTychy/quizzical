@@ -83,7 +83,7 @@ export default function App() {
     setStartQuizz(false)
     setEndQuizz(false)
     setResult(0)
-    setQuestions([])
+    //setQuestions([])
   }
 
   return (
