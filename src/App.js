@@ -91,7 +91,7 @@ export default function App() {
     <div className="App">
       <img className='blob-yellow' src={blob1} alt='corner yellow background' />
       <img className='blob-blue' src={blob2} alt='corner blue background' />
-      {startQuizz ? 
+      {startQuizz && questions.length > 0 ? 
       <QuestionPage 
       questions={questions}
       chooseAnswer={chooseAnswer}
