@@ -46,11 +46,12 @@ export default function App() {
                 answers: shuffledAnswers
               }
           })
-
-          setQuestions(dataArray)    
+          setQuestions(dataArray)
        }
-
-       getQuestions()
+       
+       if(startQuizz) {
+        getQuestions()
+       }
   }, [startQuizz])
 
  function start() {
